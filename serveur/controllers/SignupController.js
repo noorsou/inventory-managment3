@@ -1,31 +1,24 @@
 const bcrypt = require('bcrypt');
-const SignupModel = require('./models/SignupModel');
+const UserModel = require('./model/usermodel');
 
-// Signup controller function
-const signup = (req, res) => {
-  const { UserName, Email, Password, Role } = req.body;
+const signupController = (req, res) => {
+  const { userName, email, password, role } = req.body;
 
-  if (!UserName || !Email || !Password || !Role) {
-    return res.status(400).json({ error: 'All fields are required' });
-  }
+  // Check if the email is already registered
+  UserModel.findByEmail(email, (err, existingUser) => {
+    if (err) return res.status(500).json({ error: err.message });
+    if (existingUser) return res.status(400).json({ message: 'Email already in use' });
 
-  bcrypt.hash(Password, 10, (err, hashedPassword) => {
-    if (err) {
-      console.error('Error hashing password:', err);
-      return res.status(500).json({ error: 'Server error' });
-    }
+    // Create a new user instance
+    const newUser = new UserModel(userName, email, password, role);
 
-    const newSignup = { UserName, Email, Password: hashedPassword, Role };
-    SignupModel.createSignup(newSignup, (err, results) => {
-      if (err) {
-        console.error('Error inserting user:', err);
-        return res.status(500).json({ error: 'Database error' });
-      }
-      res.status(201).json({ message: 'User created successfully' });
+    // Save the new user to the database
+    newUser.save((err, results) => {
+      if (err) return res.status(500).json({ error: err.message });
+      res.status(201).json({ message: 'User signed up successfully!', data: results });
     });
   });
 };
 
 module.exports = {
-  signup
-};
+  signupController };
