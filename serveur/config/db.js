@@ -2,9 +2,9 @@ const mysql = require('mysql2');
 
 const db = mysql.createPool({
   host: 'localhost',  // Replace with your MySQL host
-  user: 'your_username',  // Replace with your MySQL username
-  password: 'your_password',  // Replace with your MySQL password
-  database: 'your_database_name'  // Replace with your database name
+  user: 'root',  // Replace with your MySQL username
+  password: 'MySQL$2024!',  // Replace with your MySQL password
+  database: 'inventory_mange_users'  // Replace with your database name
 });
 
 db.getconnection((err,connection) => {
