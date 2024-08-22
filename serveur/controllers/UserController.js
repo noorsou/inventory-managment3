@@ -1,24 +1,50 @@
 const bcrypt = require('bcrypt');
-const UserModel = require('./model/usermodel');
+const jwt = require('jsonwebtoken');
+const UserModel = require('./models/Usermodel');
+require('dotenv').config();
 
-const signupController = (req, res) => {
-  const { userName, email, password, role } = req.body;
+class UserController {
+  static async signup(req, res) {
+    const { userName, email, password, role } = req.body;
 
-  // Check if the email is already registered
-  UserModel.findByEmail(email, (err, existingUser) => {
-    if (err) return res.status(500).json({ error: err.message });
-    if (existingUser) return res.status(400).json({ message: 'Email already in use' });
+    try {
+      // Check if the email is already registered
+      const existingUser = await UserModel.findByEmail(email);
+      if (existingUser) {
+        return res.status(400).json({ message: 'Email already in use' });
+      }
 
-    // Create a new user instance
-    const newUser = new UserModel(userName, email, password, role);
+      const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Save the new user to the database
-    newUser.save((err, results) => {
-      if (err) return res.status(500).json({ error: err.message });
-      res.status(201).json({ message: 'User signed up successfully!', data: results });
-    });
-  });
-};
+      // Create a new user instance
+      const newUser = new UserModel(userName, email, hashedPassword, role);
 
-module.exports = {
-  signupController };
+      // Save the new user to the database
+      const result = await newUser.save();
+      if (result) {
+        // Generate JWT token
+        const token = jwt.sign(
+          { userId: result.id_users, userName: result.userName, role: result.role },
+          process.env.JWT_SECRET_KEY,
+          { expiresIn: '120m' }
+        );
+
+        res.cookie('jwt', token, {
+          maxAge: 3500000,
+          httpOnly: true,
+          secure: true,
+          sameSite: 'Strict',
+        });
+
+        return res.status(201).json({ message: 'User signed up successfully!', data: result });
+      } else {
+        return res.status(500).json({ message: 'Failed to save user' });
+      }
+    } catch (error) {
+      console.error('Signup error:', error);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+}
+
+module.exports = UserController;
