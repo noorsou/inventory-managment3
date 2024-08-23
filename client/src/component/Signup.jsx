@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Signup.css';
+import './Login.jsx';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -89,7 +90,6 @@ const Signup = () => {
         </div>
         <button type="submit" className="btn">Sign Up</button>
         <p className='p'>Already have an account? Login</p>
-        <button type="submit" className="btn2">Login</button>
 
       </form>
     </div>

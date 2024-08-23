@@ -1,6 +1,4 @@
-// usermodel.js
-
-const db = require('../path/to/db'); // Make sure to update this path to your actual db connection
+const db = require('../path/to/db'); 
 
 class UserModel {
   constructor(userName, email, password, role) {
