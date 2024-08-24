@@ -1,0 +1,29 @@
+/* src/components/Header.css */
+header {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  nav ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  nav ul li {
+    margin-right: 15px;
+  }
+  
+  .homeicon {
+    display: flex;
+    align-items: center;
+  }
+  
+  .home-icon-img {
+    width: 24px; /* Adjust the size as needed */
+    height: 24px; /* Adjust the size as needed */
+  }
+  

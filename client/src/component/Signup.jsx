@@ -1,97 +1,44 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom'; 
 import './Signup.css';
-import './Login.jsx';
+import email_icon from '../images/email.png';
+import password_icon from '../images/password.png';
 
 const Signup = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    role: ''
-  });
-  const navigate = useNavigate();
-
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post('http://localhost:5000/api/signup', formData);
-      console.log('Signup successful:', response.data);
-      navigate('/'); 
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
-
   return (
-    <div className="card-container">
-      <h2 className="signup-heading">Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            id="username"
-            name="username"  
-            type="text"
-            value={formData.username}
-            onChange={handleInputChange}
-            placeholder="Username"
-            required
-            className="form-control"
-          />
+    <div className='container'>
+      <div className="header">
+        <div className="text">Signup</div>
+        <div className="underline"></div>
+      </div>
+      <div className="inputs">
+      <div className="input">
+        <input id="name"   name="name"
+            placeholder="UserName"type="name" /> 
         </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            name="email"  
+        <div className="input">
+          <input id="email"
             type="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            placeholder="Email"
-            required
-            className="form-control"
-          />
+            name="email"
+            placeholder="Email"/>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
+        <div className="input">
           <input
             id="password"
-            name="password"  
             type="password"
-            value={formData.password}
-            onChange={handleInputChange}
+            name="password"
             placeholder="Password"
-            required
-            className="form-control"
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="role">Role</label>
-          <input
-            id="role"
-            name="role" 
-            type="text"
-            value={formData.role}
-            onChange={handleInputChange}
-            placeholder="Role"
-            required
-            className="form-control"
-          />
+        <div className="input">
+        <input id="txt"   name="Roul"
+            placeholder="Roul"type="roul" /> 
         </div>
         <button type="submit" className="btn">Sign Up</button>
-        <p className='p'>Already have an account? Login</p>
-
-      </form>
+        <p className='p'>
+          Already have an account? <Link to="/login" className="btn2">Login</Link>
+        </p>
+      </div>
     </div>
   );
 };

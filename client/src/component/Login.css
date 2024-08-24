@@ -42,7 +42,7 @@
             align-items: center;
             margin: auto;
             width: 480px;
-             height: 80px;
+             height: 50px;
             background: #eaeaea;
             border-radius: 6px;
             padding-left: 10px;
@@ -72,18 +72,30 @@
             color: #4c00b4;
             cursor: pointer;
             }
+       
             .submit{
-                display: flex;
                 justify-content: center;
                 align-items: center;
-                width: 100px;
-                margin-left: 40%;
-                margin-top: 5%;
-                color: #fff;
-                background: #4c00b4;
-                border-radius: 50px;
-                font-size: 19px;
-                font-weight: 700;
+                width: 450px;
+                margin-left: 13%;
+                padding: 1rem;
+                background-color: #3b45c9; 
+                color: #ffffff;
+                border: none;
                 cursor: pointer;
+                font-size: 1rem;
+                transition: background-color 0.3s ease;
+
             }
-        
+            
+            
+            .submit:hover {
+                background-color: #835abd; 
+            }
+            
+            .signup{
+                padding-left: 20px;
+                margin-top: 27px;
+                color: #797979;
+                font-size: 18px;
+                }

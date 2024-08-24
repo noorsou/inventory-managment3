@@ -46,19 +46,5 @@ class UserController {
   }
 }
 
-static async login(req, res) {
-  try {
-    const { email, password } = req.body;
-    const loginResult = await UserModel.login(email, password);
-
-    if (loginResult.success) {
-      const token = jwt.sign(
-        { userId: loginResult.user.id_users, fullname: loginResult.user.fullname, role: loginResult.user.role },
-
-        process.env.JWT_SECRET_KEY,
-        {
-          expiresIn: "120m", 
-        }}
-      );
 
 module.exports = UserController;

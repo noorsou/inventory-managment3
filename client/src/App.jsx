@@ -1,13 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-//import Header from './component/Header';
 import Signup from './component/Signup';
 import Home from './component/pages/Home';
 import Login from './component/Login';
+import Header from './component/Header';
+
 
 const App = () => {
   return (
     <Router>
+       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Signup" element={<Signup />} />

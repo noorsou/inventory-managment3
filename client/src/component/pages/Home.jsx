@@ -5,12 +5,13 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleSignupClick = () => {
-    navigate('/signup'); // Redirects to the signup page
+    navigate('/signup'); 
   };
 
   return (
     <div>
       <h1>Welcome to the Management Inventory</h1>
+      <p>Manage your inventory efficiently and effectively.</p>
       <button onClick={handleSignupClick}>Sign Up</button>
     </div>
   );
