@@ -1,9 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router-dom'; 
 import './Signup.css';
-import email_icon from '../images/email.png';
-import password_icon from '../images/password.png';
-
 const Signup = () => {
   return (
     <div className='container'>
@@ -31,8 +27,8 @@ const Signup = () => {
           />
         </div>
         <div className="input">
-        <input id="txt"   name="Roul"
-            placeholder="Roul"type="roul" /> 
+        <input id="txt"   name="Role"
+            placeholder="Role"type="role" /> 
         </div>
         <button type="submit" className="btn">Sign Up</button>
         <p className='p'>

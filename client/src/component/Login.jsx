@@ -1,6 +1,4 @@
 
-import { useState } from 'react';
-import user_icon from '../images/person.png';
 import email_icon from '../images/email.png';
 import password_icon from '../images/password.png';
 import './Login.css';
@@ -13,7 +11,6 @@ const Login = () => {
         <div className="text">Login</div>
         <div className="underline"></div>
       </div>
-      
       <div className="inputs">
       <div className="input">
         <img src={email_icon} alt="" /> 
